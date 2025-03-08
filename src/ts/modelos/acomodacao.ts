@@ -25,7 +25,7 @@ export default class Acomodacao {
     public get Climatizacao() { return this.climatizacao }
     public get Garagem() { return this.garagem }
 
-    // public set setNomeAcomodacao(nomeAcomadacao: String) { this.nomeAcomadacao = nomeAcomadacao as NomeAcomadacao}
+    public set setNomeAcomodacao(nomeAcomadacao: String) { this.nomeAcomadacao = nomeAcomadacao as NomeAcomadacao}
     public set setCamaSolteiro(camaSolteiro: Number) { this.camaSolteiro = camaSolteiro}
     public set setCamaCasal(camaCasal: Number) { this.camaCasal = camaCasal}
     public set setSuite(suite: Number) { this.suite = suite}

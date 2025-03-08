@@ -1,13 +1,7 @@
 import Processo from "../../abstracoes/processo";
 import Armazem from "../../dominio/armazem";
 import MenuEditarEstadia from "../../menus/menuEditarEstadia";
-import MenuTipoEdicaoClientes from "../../menus/menuTipoEdicaoCliente";
-import EditarClienteDependente from "../editar/editarClienteDependente";
-import EditarClienteTitular from "../editar/EditarClienteTitular";
-import ListagemDependentes from "../listar/listagemDependentes";
 import ListagemTitulares from "../listar/listagemTitulares";
-import TipoAcomodacao from "../seleçãoTipos/tipoAcomodação";
-
 
 export default class ExcluirEstadia extends Processo {
     constructor() {
