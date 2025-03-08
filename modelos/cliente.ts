@@ -15,8 +15,8 @@ export default class Cliente {
     public titular: Cliente
 
 
-    adiconarTelefoneParaDependente(): Telefone[]{
-        return this.telefones.map((telefone) => telefone.clonar() as Telefone)
-    }
+    // adiconarTelefoneParaDependente(): Telefone[]{
+    //     return this.telefones.map((telefone) => telefone.clonar() as Telefone)
+    // }
 
 }

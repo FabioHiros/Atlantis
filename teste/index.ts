@@ -19,6 +19,12 @@ let telefone = new Telefone();
 telefone.ddd = "12";
 telefone.numero = "40028922";
 cliente.telefones.push(telefone)
+
+let telefoneNovo = new Telefone()
+telefoneNovo.ddd= '21'
+telefoneNovo.numero='12321321321'
+cliente.telefones.push(telefoneNovo)
+
 let dependente = new Cliente()
 dependente.nome = `Isabel Cristina Leopoldina Augusta Micaela`
 dependente.nomeSocial = `Princesa Isabel`
@@ -27,8 +33,11 @@ dependente.dataNascimento = new Date(1846, 6, 29)
 dependente.endereco = (cliente.endereco.clonar() as Endereco)
 dependente.titular = cliente
 
+//Clonando os telefones para o dependente
+dependente.telefones = (cliente.telefones.map(telefone => telefone.clonar() as Telefone))
 
-dependente.telefones = cliente.adiconarTelefoneParaDependente();
+
+cliente.telefones.map(telefone => console.log(telefone))
 
 cliente.dependentes.push(dependente)
 
@@ -39,6 +48,6 @@ console.log(dependente.telefones);
 
 
 
-console.log('/////////////////////////')
-console.log(cliente)
-console.log(dependente)
+// console.log('/////////////////////////')
+// console.log(cliente)
+// console.log(dependente)

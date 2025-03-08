@@ -1,7 +1,7 @@
 import Prototipo from "../interfaces/prototipo"
 import Cliente from "./cliente";
 
-export default class Telefone extends Cliente implements Prototipo<Telefone> {
+export default class Telefone implements Prototipo<Telefone> {
      ddd: string
      numero: string
 
