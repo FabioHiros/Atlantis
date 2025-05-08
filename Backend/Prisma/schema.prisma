@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id             String      @id @default(uuid())
+  nome           String
+  nomeSocial     String
+  dataNascimento DateTime
+  dataCadastro   DateTime    @default(now())
+  
+  // Relationships
+  documentos     Documento[]
+  telefones      Telefone[]
+  enderecoId     String?
+  endereco       Endereco?   @relation(fields: [enderecoId], references: [id])
+  
+  // Dependency relationships
+  titularId      String?
+  titular        Cliente?    @relation("DependenteToTitular", fields: [titularId], references: [id])
+  dependentes    Cliente[]   @relation("DependenteToTitular")
+  
+  // Estadias
+  estadias       Estadia[]
+}
+
+model Documento {
+  id            String   @id @default(uuid())
+  numero        String   @unique
+  tipo          String
+  dataExpedicao DateTime
+  
+  // Relationship
+  clienteId     String
+  cliente       Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+}
+
+model Telefone {
+  id        String  @id @default(uuid())
+  ddd       String
+  numero    String
+  
+  // Relationship
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+}
+
+model Endereco {
+  id           String    @id @default(uuid())
+  rua          String
+  bairro       String
+  cidade       String
+  estado       String
+  pais         String
+  codigoPostal String
+  
+  // Relationship
+  clientes     Cliente[]
+}
+
+model Acomodacao {
+  id            String    @id @default(uuid())
+  nomeAcomodacao String
+  camaSolteiro  Int
+  camaCasal     Int
+  suite         Int
+  climatizacao  Boolean
+  garagem       Int
+  
+  // Relationship
+  estadias      Estadia[]
+}
+
+model Estadia {
+  id           String     @id @default(uuid())
+  checkIn      DateTime
+  checkOut     DateTime
+  
+  // Relationships
+  titularId    String
+  titular      Cliente    @relation(fields: [titularId], references: [id])
+  
+  acomodacaoId String
+  acomodacao   Acomodacao @relation(fields: [acomodacaoId], references: [id])
+}
