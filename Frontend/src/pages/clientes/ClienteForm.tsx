@@ -33,7 +33,7 @@ const ClienteForm = () => {
     }
   });
 
-  // Fetch cliente if editing
+  
   useEffect(() => {
     const fetchCliente = async () => {
       if (isEditing && id) {
@@ -96,7 +96,7 @@ const ClienteForm = () => {
     e.preventDefault();
     console.log("Submitting form with data:", formData);
     
-    // Validate required fields
+ 
     if (!formData.nome) {
       alert("Nome é obrigatório");
       return;
@@ -173,7 +173,7 @@ const ClienteForm = () => {
     
     try {
       if (isEditing) {
-        // Update existing cliente
+   
         const updateData = {
           nome: formData.nome,
           nomeSocial: formData.nomeSocial,
@@ -188,7 +188,7 @@ const ClienteForm = () => {
           navigate(`/clientes/${id}`);
         }, 1500);
       } else {
-        // Create new titular
+      
         const response = await axios.post('http://localhost:3000/api/clientes/titular', formData);
         console.log("Create response:", response.data);
         
@@ -240,7 +240,7 @@ const ClienteForm = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
-            {/* Personal Information */}
+          
             <h3 className="text-lg font-medium text-gray-700 border-b pb-2">Informações Pessoais</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -290,7 +290,7 @@ const ClienteForm = () => {
               </div>
             </div>
 
-            {/* Only show these fields when creating a new cliente */}
+          
             {!isEditing && (
               <>
                 {/* Endereco */}
@@ -478,7 +478,7 @@ const ClienteForm = () => {
               </>
             )}
 
-            {/* Form actions */}
+           
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

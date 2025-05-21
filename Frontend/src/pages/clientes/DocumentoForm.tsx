@@ -18,7 +18,7 @@ const DocumentoForm = () => {
     dataExpedicao: ''
   });
 
-  // Fetch cliente info
+ 
   useEffect(() => {
     const fetchCliente = async () => {
       try {
@@ -46,7 +46,7 @@ const DocumentoForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
+
     if (!formData.tipo) {
       alert("Tipo de documento é obrigatório");
       return;
@@ -65,7 +65,7 @@ const DocumentoForm = () => {
     setSubmitStatus('loading');
     
     try {
-      // Add documento to cliente
+    
       const response = await axios.post(`http://localhost:3000/api/clientes/${id}/documento`, formData);
       console.log("Add documento response:", response.data);
       
@@ -170,7 +170,7 @@ const DocumentoForm = () => {
               </div>
             </div>
 
-            {/* Form actions */}
+         
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

@@ -16,7 +16,7 @@ export class ClienteService {
     this.documentContext = new DocumentContext(new CPFStrategy(prisma));
   }
 
-  // Get all clientes
+
   async findAll(): Promise<Cliente[]> {
     return this.prisma.cliente.findMany({
       include: {
@@ -28,7 +28,7 @@ export class ClienteService {
     });
   }
 
-  // Get cliente by ID
+
   async findById(id: string): Promise<Cliente | null> {
     return this.prisma.cliente.findUnique({
       where: { id },
@@ -41,7 +41,7 @@ export class ClienteService {
     });
   }
 
-  // Get all titulares (clients without a titular)
+
   async findAllTitulares(): Promise<Cliente[]> {
     return this.prisma.cliente.findMany({
       where: {
@@ -56,7 +56,7 @@ export class ClienteService {
     });
   }
 
-  // Get all dependentes
+
   async findAllDependentes(): Promise<Cliente[]> {
     return this.prisma.cliente.findMany({
       where: {
@@ -73,7 +73,7 @@ export class ClienteService {
     });
   }
 
-  // Get dependentes of a specific titular
+
   async findDependentesByTitularId(titularId: string): Promise<Cliente[]> {
     return this.prisma.cliente.findMany({
       where: {
@@ -87,7 +87,7 @@ export class ClienteService {
     });
   }
 
-  // Create a new titular
+
   async createTitular(data: {
     nome: string;
     nomeSocial: string;
@@ -110,12 +110,11 @@ export class ClienteService {
       dataExpedicao: Date;
     };
   }): Promise<Cliente> {
-    // Create the endereco first
+   
     const endereco = await this.prisma.endereco.create({
       data: data.endereco
     });
 
-    // Create the cliente with the endereco
     const cliente = await this.prisma.cliente.create({
       data: {
         nome: data.nome,
@@ -125,7 +124,7 @@ export class ClienteService {
       }
     });
 
-    // Add telefone
+  
     await this.prisma.telefone.create({
       data: {
         ddd: data.telefone.ddd,
@@ -134,7 +133,7 @@ export class ClienteService {
       }
     });
 
-    // Use strategy pattern for document creation
+    
     switch (data.documento.tipo) {
       case 'CPF':
         this.documentContext.setStrategy(new CPFStrategy(this.prisma));
@@ -153,11 +152,10 @@ export class ClienteService {
       clienteId: cliente.id
     });
 
-    // Return the created client with all relationships
+  
     return this.findById(cliente.id) as Promise<Cliente>;
   }
 
-  // Create a new dependente
   async createDependente(titularId: string, data: {
     nome: string;
     nomeSocial: string;
@@ -168,7 +166,7 @@ export class ClienteService {
       dataExpedicao: Date;
     };
   }): Promise<Cliente> {
-    // Find the titular first
+
     const titular = await this.prisma.cliente.findUnique({
       where: { id: titularId },
       include: { endereco: true }
@@ -178,7 +176,7 @@ export class ClienteService {
       throw new Error('Titular not found');
     }
 
-    // Create the dependente with the same endereco as the titular
+    
     const dependente = await this.prisma.cliente.create({
       data: {
         nome: data.nome,
@@ -189,7 +187,7 @@ export class ClienteService {
       }
     });
 
-    // Use strategy pattern for document creation
+    
     switch (data.documento.tipo) {
       case 'CPF':
         this.documentContext.setStrategy(new CPFStrategy(this.prisma));
@@ -208,7 +206,7 @@ export class ClienteService {
       clienteId: dependente.id
     });
 
-    // Copy telefones from titular to dependente
+    
     const telefonesDoTitular = await this.prisma.telefone.findMany({
       where: { clienteId: titular.id }
     });
@@ -223,11 +221,11 @@ export class ClienteService {
       });
     }
 
-    // Return the created dependente with all relationships
+    
     return this.findById(dependente.id) as Promise<Cliente>;
   }
 
-  // Update cliente
+  
   async updateCliente(id: string, data: {
     nome?: string;
     nomeSocial?: string;
@@ -239,7 +237,7 @@ export class ClienteService {
     });
   }
 
-  // Update cliente's endereco
+  
   async updateClienteEndereco(id: string, enderecoData: {
     rua?: string;
     bairro?: string;
@@ -257,20 +255,20 @@ export class ClienteService {
       throw new Error('Cliente or endereco not found');
     }
 
-    // Update endereco
+    
     return this.prisma.endereco.update({
       where: { id: cliente.enderecoId },
       data: enderecoData
     });
   }
 
-  // Add documento to cliente
+  
   async addDocumentoToCliente(clienteId: string, data: {
     tipo: 'CPF' | 'RG' | 'Passaporte';
     numero: string;
     dataExpedicao: Date;
   }): Promise<Documento> {
-    // Use strategy pattern for document creation
+    
     switch (data.tipo) {
       case 'CPF':
         this.documentContext.setStrategy(new CPFStrategy(this.prisma));
@@ -290,7 +288,7 @@ export class ClienteService {
     });
   }
 
-  // Add telefone to cliente
+  
   async addTelefoneToCliente(clienteId: string, data: {
     ddd: string;
     numero: string;
@@ -304,7 +302,7 @@ export class ClienteService {
     });
   }
 
-  // Delete cliente
+ 
   async deleteCliente(id: string): Promise<Cliente> {
     return this.prisma.cliente.delete({
       where: { id }

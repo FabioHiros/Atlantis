@@ -10,7 +10,7 @@ const EstadiaForm = () => {
   const location = useLocation();
   const isEditing = !!id;
   
-  // Get preselected values from location state if present
+  
   const preselectedTitularId = location.state?.titularId || '';
   const preselectedAcomodacaoId = location.state?.acomodacaoId || '';
   
@@ -32,21 +32,21 @@ const EstadiaForm = () => {
     checkOut: format(tomorrow, 'yyyy-MM-dd')
   });
 
-  // Fetch required data
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         
-        // Fetch titulares (clientes that are not dependentes)
+      
         const titularesResponse = await axios.get('http://localhost:3000/api/clientes/titulares');
         setTitulares(titularesResponse.data);
         
-        // Fetch acomodacoes
+      
         const acomodacoesResponse = await axios.get('http://localhost:3000/api/acomodacoes');
         setAcomodacoes(acomodacoesResponse.data);
         
-        // If editing, fetch the estadia details
+     
         if (isEditing) {
           const estadiaResponse = await axios.get(`http://localhost:3000/api/estadias/${id}`);
           const estadia = estadiaResponse.data;
@@ -80,7 +80,7 @@ const EstadiaForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
+   
     if (!isEditing && !formData.titularId) {
       alert("Cliente titular é obrigatório");
       return;
@@ -101,7 +101,7 @@ const EstadiaForm = () => {
       return;
     }
     
-    // Validate check-out date is after check-in date
+   
     const checkInDate = new Date(formData.checkIn);
     const checkOutDate = new Date(formData.checkOut);
     
@@ -114,7 +114,7 @@ const EstadiaForm = () => {
     
     try {
       if (isEditing) {
-        // Update existing estadia (can't change titular)
+      
         const updateData = {
           acomodacaoId: formData.acomodacaoId,
           checkIn: formData.checkIn,
@@ -124,7 +124,7 @@ const EstadiaForm = () => {
         const response = await axios.put(`http://localhost:3000/api/estadias/${id}`, updateData);
         console.log("Update response:", response.data);
       } else {
-        // Create new estadia
+       
         const response = await axios.post('http://localhost:3000/api/estadias', formData);
         console.log("Create response:", response.data);
       }
@@ -174,7 +174,7 @@ const EstadiaForm = () => {
           )}
 
           <div className="space-y-4">
-            {/* Cliente selection - only when creating new estadia */}
+           
             {!isEditing && (
               <div className="mb-4">
                 <label htmlFor="titularId" className="block text-gray-700 font-medium mb-1">
@@ -198,7 +198,7 @@ const EstadiaForm = () => {
               </div>
             )}
 
-            {/* Acomodacao selection */}
+          
             <div className="mb-4">
               <label htmlFor="acomodacaoId" className="block text-gray-700 font-medium mb-1">
                 Acomodação <span className="text-red-500">*</span>
@@ -220,7 +220,7 @@ const EstadiaForm = () => {
               </select>
             </div>
 
-            {/* Check-in and Check-out dates */}
+           
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="mb-4">
                 <label htmlFor="checkIn" className="block text-gray-700 font-medium mb-1">
@@ -253,7 +253,7 @@ const EstadiaForm = () => {
               </div>
             </div>
 
-            {/* Form actions */}
+         
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

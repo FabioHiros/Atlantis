@@ -14,7 +14,7 @@ const ClienteDetail = () => {
   const [deleteStatus, setDeleteStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [deleteError, setDeleteError] = useState('');
 
-  // Fetch cliente details
+  
   const { data: cliente, isLoading, isError } = useQuery({
     queryKey: ['cliente', id],
     queryFn: async () => {
@@ -24,7 +24,7 @@ const ClienteDetail = () => {
     enabled: !!id
   });
 
-  // Fetch dependentes if cliente is a titular
+
   const { data: dependentes } = useQuery({
     queryKey: ['dependentes', id],
     queryFn: async () => {
@@ -34,7 +34,7 @@ const ClienteDetail = () => {
     enabled: !!id && cliente?.titularId === null
   });
 
-  // Fetch estadias for this cliente
+ 
   const { data: estadias } = useQuery({
     queryKey: ['clienteEstadias', id],
     queryFn: async () => {
@@ -44,14 +44,14 @@ const ClienteDetail = () => {
     enabled: !!id && cliente?.titularId === null
   });
 
-  // Handle cliente deletion
+  
   const confirmDelete = async () => {
     setDeleteStatus('loading');
     try {
       await clienteService.deleteCliente(id);
       setDeleteStatus('success');
       
-      // Navigate back to clientes list after a short delay
+      
       setTimeout(() => {
         navigate('/clientes');
       }, 1500);
@@ -94,7 +94,7 @@ const ClienteDetail = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {/* Cliente Info */}
+        
         <Card className="md:col-span-2">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <FaUser className="mr-2 text-blue-500" />
@@ -235,7 +235,7 @@ const ClienteDetail = () => {
         </Card>
       </div>
 
-      {/* Dependentes (if cliente is a titular) */}
+     
       {cliente.titularId === null && (
         <Card className="mb-8">
           <div className="flex justify-between items-center mb-4">
@@ -279,7 +279,7 @@ const ClienteDetail = () => {
         </Card>
       )}
 
-      {/* Estadias (if cliente is a titular) */}
+      
       {cliente.titularId === null && (
         <Card>
           <div className="flex justify-between items-center mb-4">
@@ -327,7 +327,7 @@ const ClienteDetail = () => {
         </Card>
       )}
 
-      {/* Delete confirmation modal */}
+    
       <Modal
         isOpen={showDeleteModal}
         onClose={() => deleteStatus === 'idle' && setShowDeleteModal(false)}

@@ -8,7 +8,7 @@ export class EstadiaService {
     this.prisma = prisma;
   }
 
-  // Get all estadias
+  
   async findAll(): Promise<Estadia[]> {
     return this.prisma.estadia.findMany({
       include: {
@@ -22,7 +22,7 @@ export class EstadiaService {
     });
   }
 
-  // Get estadia by ID
+  
   async findById(id: string): Promise<Estadia | null> {
     return this.prisma.estadia.findUnique({
       where: { id },
@@ -37,7 +37,7 @@ export class EstadiaService {
     });
   }
 
-  // Get estadias by titularId
+
   async findByTitularId(titularId: string): Promise<Estadia[]> {
     return this.prisma.estadia.findMany({
       where: {
@@ -49,14 +49,14 @@ export class EstadiaService {
     });
   }
 
-  // Create a new estadia
+
   async createEstadia(data: {
     titularId: string;
     acomodacaoId: string;
     checkIn: Date;
     checkOut: Date;
   }): Promise<Estadia> {
-    // Validate the titular exists and is not a dependente
+    
     const titular = await this.prisma.cliente.findUnique({
       where: { id: data.titularId }
     });
@@ -69,7 +69,7 @@ export class EstadiaService {
       throw new Error('Dependentes cannot be the titular of an estadia');
     }
 
-    // Create the estadia
+   
     return this.prisma.estadia.create({
       data: {
         titularId: data.titularId,
@@ -84,7 +84,7 @@ export class EstadiaService {
     });
   }
 
-  // Update estadia
+ 
   async updateEstadia(id: string, data: {
     acomodacaoId?: string;
     checkIn?: Date;
@@ -100,7 +100,7 @@ export class EstadiaService {
     });
   }
 
-  // Delete estadia
+  
   async deleteEstadia(id: string): Promise<Estadia> {
     return this.prisma.estadia.delete({
       where: { id }

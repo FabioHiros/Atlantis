@@ -9,19 +9,19 @@ export class AcomodacaoService {
     this.prisma = prisma;
   }
 
-  // Get all acomodacoes
+ 
   async findAll(): Promise<Acomodacao[]> {
     return this.prisma.acomodacao.findMany();
   }
 
-  // Get acomodacao by ID
+
   async findById(id: string): Promise<Acomodacao | null> {
     return this.prisma.acomodacao.findUnique({
       where: { id }
     });
   }
 
-  // Create default acomodacoes
+  
   async createDefaultAcomodacoes(): Promise<Acomodacao[]> {
     const directors = [
       new SolteiroSimplesDirector(this.prisma),
@@ -41,7 +41,7 @@ export class AcomodacaoService {
     return acomodacoes;
   }
 
-  // Create custom acomodacao
+  
   async createCustomAcomodacao(data: {
     nomeAcomodacao: string;
     camaSolteiro: number;
@@ -54,7 +54,7 @@ export class AcomodacaoService {
     return director.build(data);
   }
 
-  // Update acomodacao
+
   async updateAcomodacao(id: string, data: {
     nomeAcomodacao?: string;
     camaSolteiro?: number;
@@ -69,7 +69,7 @@ export class AcomodacaoService {
     });
   }
 
-  // Delete acomodacao
+
   async deleteAcomodacao(id: string): Promise<Acomodacao> {
     return this.prisma.acomodacao.delete({
       where: { id }

@@ -8,7 +8,7 @@ export class AcomodacaoController {
   constructor() {
     this.acomodacaoService = new AcomodacaoService(prisma);
     
-    // Bind methods to maintain 'this' context
+
     this.getAll = this.getAll.bind(this);
     this.getById = this.getById.bind(this);
     this.createDefaults = this.createDefaults.bind(this);
@@ -17,7 +17,7 @@ export class AcomodacaoController {
     this.delete = this.delete.bind(this);
   }
 
-  // Get all acomodacoes
+  
   async getAll(req: Request, res: Response): Promise<void> {
     try {
       const acomodacoes = await this.acomodacaoService.findAll();
@@ -27,7 +27,7 @@ export class AcomodacaoController {
     }
   }
 
-  // Get acomodacao by ID
+
   async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -44,7 +44,7 @@ export class AcomodacaoController {
     }
   }
 
-  // Create default acomodacoes
+ 
   async createDefaults(req: Request, res: Response): Promise<void> {
     try {
       const acomodacoes = await this.acomodacaoService.createDefaultAcomodacoes();
@@ -54,7 +54,7 @@ export class AcomodacaoController {
     }
   }
 
-  // Create custom acomodacao
+
   async createCustom(req: Request, res: Response): Promise<void> {
     try {
       const { nomeAcomodacao, camaSolteiro, camaCasal, suite, climatizacao, garagem } = req.body;
@@ -74,7 +74,7 @@ export class AcomodacaoController {
     }
   }
 
-  // Update acomodacao
+
   async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -95,7 +95,7 @@ export class AcomodacaoController {
     }
   }
 
-  // Delete acomodacao
+
   async delete(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;

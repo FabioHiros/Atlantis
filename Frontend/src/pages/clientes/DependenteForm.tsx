@@ -24,7 +24,7 @@ const DependenteForm = () => {
     }
   });
 
-  // Fetch titular info to display
+  
   useEffect(() => {
     const fetchTitular = async () => {
       try {
@@ -66,7 +66,7 @@ const DependenteForm = () => {
     e.preventDefault();
     console.log("Submitting form with data:", formData);
     
-    // Validate required fields
+    
     if (!formData.nome) {
       alert("Nome é obrigatório");
       return;
@@ -100,7 +100,7 @@ const DependenteForm = () => {
     setSubmitStatus('loading');
     
     try {
-      // Create dependente
+    
       const response = await axios.post(`http://localhost:3000/api/clientes/titular/${titularId}/dependente`, formData);
       console.log("Create response:", response.data);
       
@@ -159,7 +159,7 @@ const DependenteForm = () => {
           )}
 
           <div className="space-y-4">
-            {/* Personal Information */}
+           
             <h3 className="text-lg font-medium text-gray-700 border-b pb-2">Informações Pessoais</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -262,7 +262,7 @@ const DependenteForm = () => {
               </div>
             </div>
 
-            {/* Form actions */}
+           
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"
@@ -284,10 +284,10 @@ const DependenteForm = () => {
       </Card>
 
       {/* Debug info - will be visible in production, remove after fixing */}
-      <div className="mt-4 p-4 bg-gray-100 rounded">
+      {/* <div className="mt-4 p-4 bg-gray-100 rounded">
         <h3 className="font-bold mb-2">Debug Info (remove in production):</h3>
         <pre className="text-xs overflow-auto">{JSON.stringify(formData, null, 2)}</pre>
-      </div>
+      </div> */}
     </div>
   );
 };

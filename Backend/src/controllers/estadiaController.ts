@@ -8,7 +8,7 @@ export class EstadiaController {
   constructor() {
     this.estadiaService = new EstadiaService(prisma);
     
-    // Bind methods to maintain 'this' context
+   
     this.getAll = this.getAll.bind(this);
     this.getById = this.getById.bind(this);
     this.getByTitularId = this.getByTitularId.bind(this);
@@ -17,7 +17,7 @@ export class EstadiaController {
     this.delete = this.delete.bind(this);
   }
 
-  // Get all estadias
+  
   getAll: RequestHandler = async (req, res) => {
     try {
       const estadias = await this.estadiaService.findAll();
@@ -27,7 +27,7 @@ export class EstadiaController {
     }
   };
 
-  // Get estadia by ID
+
   getById: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -44,7 +44,7 @@ export class EstadiaController {
     }
   };
 
-  // Get estadias by titular ID
+
   getByTitularId: RequestHandler = async (req, res) => {
     try {
       const { titularId } = req.params;
@@ -55,7 +55,7 @@ export class EstadiaController {
     }
   };
 
-  // Create a new estadia
+
   create: RequestHandler = async (req, res) => {
     try {
       const { titularId, acomodacaoId, checkIn, checkOut } = req.body;
@@ -73,7 +73,7 @@ export class EstadiaController {
     }
   };
 
-  // Update estadia
+
   update: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -91,7 +91,7 @@ export class EstadiaController {
     }
   };
 
-  // Delete estadia
+
   delete: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;

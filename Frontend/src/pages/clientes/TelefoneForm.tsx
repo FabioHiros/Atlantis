@@ -17,7 +17,7 @@ const TelefoneForm = () => {
     numero: ''
   });
 
-  // Fetch cliente info
+
   useEffect(() => {
     const fetchCliente = async () => {
       try {
@@ -45,7 +45,7 @@ const TelefoneForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
+
     if (!formData.ddd) {
       alert("DDD é obrigatório");
       return;
@@ -59,7 +59,7 @@ const TelefoneForm = () => {
     setSubmitStatus('loading');
     
     try {
-      // Add telefone to cliente
+
       const response = await axios.post(`http://localhost:3000/api/clientes/${id}/telefone`, formData);
       console.log("Add telefone response:", response.data);
       
@@ -148,7 +148,7 @@ const TelefoneForm = () => {
               </div>
             </div>
 
-            {/* Form actions */}
+     
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

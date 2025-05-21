@@ -23,7 +23,7 @@ export class ClienteController {
     this.deleteCliente = this.deleteCliente.bind(this);
   }
 
-  // Get all clientes
+  
   getAll: RequestHandler = async (req, res) => {
     try {
       const clientes = await this.clienteService.findAll();
@@ -33,7 +33,6 @@ export class ClienteController {
     }
   };
 
-  // Get cliente by ID
   getById: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -50,7 +49,7 @@ export class ClienteController {
     }
   };
 
-  // Get all titulares
+
   getAllTitulares: RequestHandler = async (req, res) => {
     try {
       const titulares = await this.clienteService.findAllTitulares();
@@ -60,7 +59,7 @@ export class ClienteController {
     }
   };
 
-  // Get all dependentes
+
   getAllDependentes: RequestHandler = async (req, res) => {
     try {
       const dependentes = await this.clienteService.findAllDependentes();
@@ -70,7 +69,6 @@ export class ClienteController {
     }
   };
 
-  // Get dependentes by titular ID
   getDependentesByTitularId: RequestHandler = async (req, res) => {
     try {
       const { titularId } = req.params;
@@ -81,7 +79,7 @@ export class ClienteController {
     }
   };
 
-  // Create a new titular
+
   createTitular: RequestHandler = async (req, res) => {
     try {
       const { nome, nomeSocial, dataNascimento, endereco, telefone, documento } = req.body;
@@ -104,7 +102,7 @@ export class ClienteController {
     }
   };
 
-  // Create a new dependente
+
   createDependente: RequestHandler = async (req, res) => {
     try {
       const { titularId } = req.params;
@@ -126,7 +124,7 @@ export class ClienteController {
     }
   };
 
-  // Update cliente
+
   updateCliente: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -144,7 +142,7 @@ export class ClienteController {
     }
   };
 
-  // Update cliente endereco
+
   updateClienteEndereco: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -165,7 +163,7 @@ export class ClienteController {
     }
   };
 
-  // Add documento to cliente
+
   addDocumentoToCliente: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -183,7 +181,6 @@ export class ClienteController {
     }
   };
 
-  // Add telefone to cliente
   addTelefoneToCliente: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;
@@ -200,7 +197,6 @@ export class ClienteController {
     }
   };
 
-  // Delete cliente
   deleteCliente: RequestHandler = async (req, res) => {
     try {
       const { id } = req.params;

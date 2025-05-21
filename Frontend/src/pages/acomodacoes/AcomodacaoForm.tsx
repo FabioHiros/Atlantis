@@ -21,7 +21,7 @@ const AcomodacaoForm = () => {
     garagem: 0
   });
 
-  // Fetch acomodacao if editing
+
   useEffect(() => {
     const fetchAcomodacao = async () => {
       if (isEditing) {
@@ -76,7 +76,7 @@ const AcomodacaoForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
+ 
     if (!formData.nomeAcomodacao) {
       alert("Nome da acomodação é obrigatório");
       return;
@@ -86,11 +86,11 @@ const AcomodacaoForm = () => {
     
     try {
       if (isEditing) {
-        // Update existing acomodacao
+       
         const response = await axios.put(`http://localhost:3000/api/acomodacoes/${id}`, formData);
         console.log("Update response:", response.data);
       } else {
-        // Create new acomodacao
+      
         const response = await axios.post('http://localhost:3000/api/acomodacoes', formData);
         console.log("Create response:", response.data);
       }
@@ -237,7 +237,6 @@ const AcomodacaoForm = () => {
               </label>
             </div>
 
-            {/* Form actions */}
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

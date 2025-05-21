@@ -21,7 +21,7 @@ const EnderecoForm = () => {
     codigoPostal: ''
   });
 
-  // Fetch cliente info
+ 
   useEffect(() => {
     const fetchCliente = async () => {
       try {
@@ -29,7 +29,7 @@ const EnderecoForm = () => {
         const response = await axios.get(`http://localhost:3000/api/clientes/${id}`);
         setCliente(response.data);
         
-        // If cliente has an endereco, populate the form with it
+       
         if (response.data.endereco) {
           setFormData({
             rua: response.data.endereco.rua || '',
@@ -62,7 +62,7 @@ const EnderecoForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
+   
     if (!formData.rua) {
       alert("Rua é obrigatória");
       return;
@@ -96,7 +96,7 @@ const EnderecoForm = () => {
     setSubmitStatus('loading');
     
     try {
-      // Update cliente endereco
+     
       const response = await axios.put(`http://localhost:3000/api/clientes/${id}/endereco`, formData);
       console.log("Update response:", response.data);
       
@@ -243,7 +243,7 @@ const EnderecoForm = () => {
               </div>
             </div>
 
-            {/* Form actions */}
+         
             <div className="flex justify-end space-x-3 mt-6">
               <Button
                 variant="secondary"

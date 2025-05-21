@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 const Dashboard = () => {
-  // Fetch summary data
+
   const { data: clientes, isLoading: loadingClientes } = useQuery({
     queryKey: ['clientesSummary'],
     queryFn: async () => {
@@ -32,12 +32,12 @@ const Dashboard = () => {
     }
   });
 
-  // Calculate summary numbers
+  
   const totalClientes = clientes?.length || 0;
   const totalAcomodacoes = acomodacoes?.length || 0;
   const totalEstadias = estadias?.length || 0;
   
-  // Get current active estadias
+  
   const today = new Date();
   const activeEstadias = estadias?.filter(estadia => {
     const checkIn = new Date(estadia.checkIn);
@@ -58,7 +58,7 @@ const Dashboard = () => {
         <Spinner />
       ) : (
         <>
-          {/* Summary Cards */}
+       
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <Card className="flex items-center">
               <div className="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
@@ -100,7 +100,7 @@ const Dashboard = () => {
             </Card>
           </div>
           
-          {/* Active Estadias */}
+    
           <Card title="Estadias Ativas">
             {activeEstadias.length > 0 ? (
               <div className="overflow-x-auto">
