@@ -23,7 +23,7 @@ const AcomodacaoDetail = () => {
     enabled: !!id
   });
 
-  // Delete acomodacao mutation
+
   const deleteMutation = useMutation({
     mutationFn: () => acomodacaoService.deleteAcomodacao(id),
     onSuccess: () => {
@@ -172,7 +172,7 @@ const AcomodacaoDetail = () => {
         </Card>
       </div>
 
-      {/* Delete confirmation modal */}
+    
       <Modal
         isOpen={showDeleteModal}
         onClose={() => !deleteMutation.isPending && setShowDeleteModal(false)}

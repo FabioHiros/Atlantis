@@ -15,7 +15,7 @@ const EstadiasList = () => {
   const [deleteStatus, setDeleteStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [deleteError, setDeleteError] = useState('');
 
-  // Fetch estadias
+ 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['estadias'],
     queryFn: async () => {
@@ -24,7 +24,7 @@ const EstadiasList = () => {
     }
   });
 
-  // Handle delete estadia
+
   const handleDeleteClick = (estadia: Estadia) => {
     setSelectedEstadia(estadia);
     setShowDeleteModal(true);
@@ -37,9 +37,9 @@ const EstadiasList = () => {
     try {
       await estadiaService.deleteEstadia(selectedEstadia.id);
       setDeleteStatus('success');
-      // Refetch estadias list
+ 
       refetch();
-      // Close modal after a short delay
+      
       setTimeout(() => {
         setShowDeleteModal(false);
         setSelectedEstadia(null);
@@ -51,13 +51,13 @@ const EstadiasList = () => {
     }
   };
 
-  // Filter estadias by search term (cliente name or acomodacao name)
+ 
   const filteredEstadias = data?.filter(estadia => 
     estadia.titular?.nome.toLowerCase().includes(search.toLowerCase()) ||
     estadia.acomodacao?.nomeAcomodacao.toLowerCase().includes(search.toLowerCase())
   ) || [];
 
-  // Check if an estadia is active (current date is between checkIn and checkOut)
+  
   const isActiveEstadia = (estadia: Estadia) => {
     const today = new Date();
     const checkIn = new Date(estadia.checkIn);
@@ -81,7 +81,7 @@ const EstadiasList = () => {
       />
 
       <Card>
-        {/* Search Bar */}
+     
         <div className="mb-6">
           <div className="relative">
             <input
@@ -180,7 +180,7 @@ const EstadiasList = () => {
         )}
       </Card>
 
-      {/* Delete confirmation modal */}
+    
       <Modal
         isOpen={showDeleteModal}
         onClose={() => deleteStatus === 'idle' && setShowDeleteModal(false)}

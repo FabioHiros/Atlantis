@@ -16,7 +16,7 @@ const ClientesList = () => {
   const [deleteStatus, setDeleteStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [deleteError, setDeleteError] = useState('');
 
-  // Fetch clientes
+
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['clientes'],
     queryFn: async () => {
@@ -25,7 +25,7 @@ const ClientesList = () => {
     }
   });
 
-  // Handle delete cliente
+  
   const handleDeleteClick = (cliente: Cliente) => {
     setSelectedCliente(cliente);
     setShowDeleteModal(true);
@@ -38,9 +38,9 @@ const ClientesList = () => {
     try {
       await clienteService.deleteCliente(selectedCliente.id);
       setDeleteStatus('success');
-      // Refetch clientes list
+   
       refetch();
-      // Close modal after a short delay
+     
       setTimeout(() => {
         setShowDeleteModal(false);
         setSelectedCliente(null);
@@ -52,7 +52,7 @@ const ClientesList = () => {
     }
   };
 
-  // Filter clientes by search term
+ 
   const filteredClientes = data?.filter(cliente => 
     cliente.nome.toLowerCase().includes(search.toLowerCase()) ||
     cliente.nomeSocial.toLowerCase().includes(search.toLowerCase())
@@ -153,7 +153,7 @@ const ClientesList = () => {
         )}
       </Card>
 
-      {/* Delete confirmation modal */}
+      
       <Modal
         isOpen={showDeleteModal}
         onClose={() => deleteStatus === 'idle' && setShowDeleteModal(false)}

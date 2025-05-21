@@ -5,7 +5,7 @@ import { FaHome, FaUsers, FaBed, FaCalendarAlt, FaBars, FaTimes } from 'react-ic
 const Sidebar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Close sidebar when screen grows beyond md breakpoint
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -17,7 +17,7 @@ const Sidebar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close sidebar when clicking outside on mobile
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const sidebar = document.getElementById('sidebar');
@@ -41,7 +41,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      
       <button
         className="md:hidden fixed top-4 left-4 z-40 bg-blue-600 text-white p-2  rounded-md"
         onClick={toggleMobileMenu}
@@ -125,7 +125,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Overlay for mobile */}
+  
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"

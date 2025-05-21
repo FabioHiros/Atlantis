@@ -14,7 +14,7 @@ const AcomodacoesList = () => {
   const [deleteStatus, setDeleteStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Fetch acomodacoes
+  
   const { data, isLoading, isError } = useQuery({
     queryKey: ['acomodacoes'],
     queryFn: async () => {
@@ -23,7 +23,7 @@ const AcomodacoesList = () => {
     }
   });
 
-  // Create default acomodacoes mutation
+ 
   const createDefaultsMutation = useMutation({
     mutationFn: acomodacaoService.createDefaultAcomodacoes,
     onSuccess: () => {
@@ -31,7 +31,7 @@ const AcomodacoesList = () => {
     }
   });
 
-  // Delete acomodacao mutation
+ 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => acomodacaoService.deleteAcomodacao(id),
     onSuccess: () => {
@@ -49,7 +49,7 @@ const AcomodacoesList = () => {
     }
   });
 
-  // Handle delete acomodacao
+  
   const handleDeleteClick = (acomodacao: Acomodacao) => {
     setSelectedAcomodacao(acomodacao);
     setShowDeleteModal(true);
@@ -61,12 +61,12 @@ const AcomodacoesList = () => {
     }
   };
 
-  // Create default acomodacoes
+  
   const handleCreateDefaults = () => {
     createDefaultsMutation.mutate();
   };
 
-  // Filter acomodacoes by search term
+ 
   const filteredAcomodacoes = data?.filter(acomodacao => 
     acomodacao.nomeAcomodacao.toLowerCase().includes(search.toLowerCase())
   ) || [];
@@ -185,7 +185,7 @@ const AcomodacoesList = () => {
         )}
       </Card>
 
-      {/* Delete confirmation modal */}
+      
       <Modal
         isOpen={showDeleteModal}
         onClose={() => !deleteMutation.isPending && setShowDeleteModal(false)}

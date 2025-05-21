@@ -14,7 +14,7 @@ const EstadiaDetail = () => {
   const [deleteStatus, setDeleteStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [deleteError, setErrorMessage] = useState('');
 
-  // Fetch estadia details
+ 
   const { data: estadia, isLoading, isError } = useQuery({
     queryKey: ['estadia', id],
     queryFn: async () => {
@@ -24,14 +24,14 @@ const EstadiaDetail = () => {
     enabled: !!id
   });
 
-  // Handle estadia deletion
+
   const confirmDelete = async () => {
     setDeleteStatus('loading');
     try {
       await estadiaService.deleteEstadia(id);
       setDeleteStatus('success');
       
-      // Navigate back to estadias list after a short delay
+      
       setTimeout(() => {
         navigate('/estadias');
       }, 1500);
@@ -41,7 +41,7 @@ const EstadiaDetail = () => {
     }
   };
 
-  // Check if an estadia is active (current date is between checkIn and checkOut)
+  
   const getEstadiaStatus = () => {
     if (!estadia) return '';
     
@@ -80,7 +80,7 @@ const EstadiaDetail = () => {
     return <Alert type="error" message="Erro ao carregar informações da estadia." />;
   }
 
-  // Calculate duration
+ 
   const durationDays = differenceInDays(
     new Date(estadia.checkOut),
     new Date(estadia.checkIn)
@@ -115,7 +115,7 @@ const EstadiaDetail = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Cliente Info */}
+      
         <Card>
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <FaUser className="mr-2 text-blue-500" />
@@ -154,7 +154,7 @@ const EstadiaDetail = () => {
           </div>
         </Card>
 
-        {/* Acomodacao Info */}
+   
         <Card>
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <FaBed className="mr-2 text-blue-500" />
@@ -193,7 +193,7 @@ const EstadiaDetail = () => {
         </Card>
       </div>
 
-      {/* Estadia Details */}
+     
       <Card className="mb-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
           <FaCalendarAlt className="mr-2 text-blue-500" />
@@ -233,7 +233,7 @@ const EstadiaDetail = () => {
         </div>
       </Card>
 
-      {/* Delete confirmation modal */}
+    
       <Modal
         isOpen={showDeleteModal}
         onClose={() => deleteStatus === 'idle' && setShowDeleteModal(false)}

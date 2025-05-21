@@ -18,7 +18,6 @@ import EstadiaForm from './pages/estadias/EstadiaForm';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashbord';
 
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
